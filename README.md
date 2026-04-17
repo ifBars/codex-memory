@@ -168,7 +168,7 @@ Once this repo is on GitHub, people can point another agent at the README and us
 
 ```text
 Install the codex-memory Codex plugin from this repo by following the README:
-<README_URL>
+https://github.com/ifBars/codex-memory/blob/main/README.md
 
 If I want it only in this checkout, use the Repo install section.
 If I want it across all workspaces, use the Personal install section.
@@ -178,15 +178,15 @@ After setup, restart Codex and make sure Codex Memory is enabled from the plugin
 Short version:
 
 ```text
-Install the Codex Memory plugin from <README_URL> and follow the Personal install section.
+Install the Codex Memory plugin from https://github.com/ifBars/codex-memory/blob/main/README.md and follow the Personal install section.
 ```
 
 If you also want the same memory behavior I use, copy the custom instructions from:
 
 ```text
-<README_URL>
+https://github.com/ifBars/codex-memory/blob/main/README.md
 or
-<CUSTOM_INSTRUCTIONS_URL>
+https://github.com/ifBars/codex-memory/blob/main/CUSTOM-INSTRUCTIONS.md
 ```
 
 ## Development
