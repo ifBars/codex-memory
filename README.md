@@ -2,7 +2,24 @@
 
 `codex-memory` is a Codex plugin for durable, consent-driven memory with tiered recall and a git-friendly context repository projection.
 
-This repo is the plugin itself. The repo root is the plugin root.
+## For Agents
+
+Paste this into your Codex to install the plugin
+
+```text
+Install the codex-memory Codex plugin from this repo by following the README:
+https://github.com/ifBars/codex-memory/blob/main/README.md
+
+If I want it only in this checkout, use the Repo install section.
+If I want it across all workspaces, use the Personal install section.
+After setup, refresh Codex and make sure Codex Memory is enabled from the plugin directory.
+```
+
+If you also want the same memory behavior I use, copy the custom instructions from:
+
+```text
+https://github.com/ifBars/codex-memory/blob/main/CUSTOM-INSTRUCTIONS.md
+```
 
 ## Why it is structured this way
 
@@ -161,33 +178,6 @@ Tools include:
 - `inspect_context_repo`
 - `sync_context_repo`
 - `doctor_memory_store`
-
-## For Agents
-
-Once this repo is on GitHub, people can point another agent at the README and use a prompt like this:
-
-```text
-Install the codex-memory Codex plugin from this repo by following the README:
-https://github.com/ifBars/codex-memory/blob/main/README.md
-
-If I want it only in this checkout, use the Repo install section.
-If I want it across all workspaces, use the Personal install section.
-After setup, restart Codex and make sure Codex Memory is enabled from the plugin directory.
-```
-
-Short version:
-
-```text
-Install the Codex Memory plugin from https://github.com/ifBars/codex-memory/blob/main/README.md and follow the Personal install section.
-```
-
-If you also want the same memory behavior I use, copy the custom instructions from:
-
-```text
-https://github.com/ifBars/codex-memory/blob/main/README.md
-or
-https://github.com/ifBars/codex-memory/blob/main/CUSTOM-INSTRUCTIONS.md
-```
 
 ## Development
 
