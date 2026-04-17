@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "memory": {
+      "type": "local",
+      "command": [
+        "python",
+        "./scripts/memory_mcp_server.py"
+      ]
+    }
+  }
+}

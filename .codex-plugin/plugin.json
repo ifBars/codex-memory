@@ -1,0 +1,35 @@
+{
+  "name": "codex-memory",
+  "version": "2.1.0",
+  "description": "Tiered recall, context repository projection, and consent-driven long-term memory workflows for Codex using local memory files.",
+  "author": {
+    "name": "ifbars",
+    "email": "",
+    "url": ""
+  },
+  "license": "MIT",
+  "keywords": [
+    "memory",
+    "codex",
+    "productivity"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Codex Memory",
+    "shortDescription": "A tiered local memory workflow with context repositories and explicit consent.",
+    "longDescription": "Codex Memory helps Codex load tiny always-on core memories, retrieve relevant semantic or episodic context for the current task, project durable context into git-friendly Markdown repositories, ask to save new memories only when they are likely to matter again, and promote stable repo rules into AGENTS.md.",
+    "developerName": "ifbars",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use Codex Memory for this repo.",
+      "Remember my coding preference.",
+      "Show stored memories for this project."
+    ],
+    "brandColor": "#0F766E"
+  }
+}
