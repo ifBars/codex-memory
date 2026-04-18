@@ -1,111 +1,17 @@
 # Codex Memory
 
-`codex-memory` is a Codex plugin for durable, consent-driven memory with tiered recall and a git-friendly context repository projection.
+I created `codex-memory` after getting annoyed with constantly telling my agents, "no, don't do that, do this instead," and then having to keep updating `AGENTS.md` or other instruction files to restate the same rules.
 
-## For Agents
+This plugin aims to fix that by giving your agents a memory system that can work both per repo and globally, while also integrating back into `AGENTS.md` when that makes sense.
 
-Paste this into your Codex to install the plugin
+The end result is an experience where your agents actually learn from mistakes instead of making you reteach the same lessons every few sessions.
 
-```text
-Install the codex-memory Codex plugin from this repo by following the README:
-https://github.com/ifBars/codex-memory/blob/main/README.md
+## Quick install
 
-If I want it only in this checkout, use the Repo install section.
-If I want it across all workspaces, use the Personal install section.
-After setup, refresh Codex and make sure Codex Memory is enabled from the plugin directory.
-```
+If you want this plugin across all workspaces:
 
-If you also want the same memory behavior I use, copy the custom instructions from:
-
-```text
-https://github.com/ifBars/codex-memory/blob/main/CUSTOM-INSTRUCTIONS.md
-```
-
-## Why it is structured this way
-
-OpenAI's current Codex plugin docs say the proper local distribution path is still marketplace-based:
-
-- a plugin bundle with `.codex-plugin/plugin.json`
-- a marketplace file in `.agents/plugins/marketplace.json`
-- restart Codex after adding or updating the marketplace
-
-They also say self-serve publishing to the official public Plugin Directory is not live yet, so the practical way to share a plugin today is still a Git repo or a local marketplace.
-
-Official docs:
-
-- [Build plugins](https://developers.openai.com/codex/plugins/build?install-scope=workspace)
-- [Plugins overview](https://developers.openai.com/codex/plugins)
-
-## What it does
-
-- splits memory into `core`, `semantic`, and `episodic` tiers
-- runs lightweight recall for repo-aware or preference-sensitive work
-- provides a `suggest` flow for explicit memory consent
-- can promote stable repo rules into `core` and export them into `AGENTS.md`
-- projects memories into inspectable Markdown context repositories
-- exposes a local MCP server named `memory`
-
-By default the memory store lives at `~/.codex/memories`. If `CODEX_HOME` is set, it uses `$CODEX_HOME/memories`.
-
-## Recommended custom instructions
-
-This plugin works best when the agent is already told to use memory selectively instead of treating every turn like a memory event.
-
-Copy-paste version:
-
-```text
-Use memory only when prior context is likely to change execution, not for trivial or cosmetic edits.
-
-Recall memory when:
-- the task affects architecture, workflows, tooling, testing, or repo conventions
-- the user states a durable preference or recurring correction
-- a reusable lesson is likely to matter again
-
-Skip memory for:
-- small copy, styling, or isolated UI tweaks
-- one-off debugging state
-- temporary task details or secrets
-
-Apply recalled memory only when relevant and non-conflicting.
-
-If exactly one durable reusable rule emerges, check whether it should be remembered.
-Ask at most once per turn, and only for stable preferences, conventions, workflows, or reusable lessons.
-Do not ask to remember incident summaries unless they are rewritten as reusable rules.
-```
-
-There is also a standalone copy at [CUSTOM-INSTRUCTIONS.md](C:\Users\ghost\Desktop\Coding\codex-plugins\codex-memory\CUSTOM-INSTRUCTIONS.md).
-
-## Repo install
-
-Use this when someone wants the plugin available inside this checkout.
-
-1. Clone the repo.
-2. Install the Python dependencies:
-
-```powershell
-python -m pip install -r .\requirements.txt
-```
-
-3. Open this repo in Codex.
-4. Restart Codex if needed.
-5. In the plugin directory, choose the `Codex Memory` marketplace and install `Codex Memory`.
-
-This repo already includes:
-
-- `.codex-plugin/plugin.json`
-- `.agents/plugins/marketplace.json`
-- `.mcp.json`
-- `skills/`
-- `scripts/`
-
-The repo marketplace points at the repo root with `source.path: "./"`.
-
-## Personal install
-
-Use this when someone wants `codex-memory` across all workspaces.
-
-1. Copy or clone this repo into `~/.codex/plugins/codex-memory`.
-2. Install the Python dependencies:
+1. Clone this repo into `~/.codex/plugins/codex-memory`
+2. Install dependencies:
 
 ```powershell
 python -m pip install -r ~/.codex/plugins/codex-memory/requirements.txt
@@ -136,11 +42,88 @@ python -m pip install -r ~/.codex/plugins/codex-memory/requirements.txt
 }
 ```
 
-4. Restart Codex.
+4. Restart or refresh Codex
+5. Enable `Codex Memory` from the plugin directory
 
-## Helper commands
+## For agents
 
-Repo install examples:
+Paste this into Codex:
+
+```text
+Install the codex-memory Codex plugin by following this README:
+https://github.com/ifBars/codex-memory/blob/main/README.md
+
+If I want it across all workspaces, use the Quick install section.
+If I only want it in one checkout, use the Repo-only install section.
+After setup, refresh Codex and make sure Codex Memory is enabled.
+```
+
+This plugin works best when the agent is already told to use memory selectively.
+
+If you also want the agent to use the skill consistently without asking, put this into your "Custom Instructions" in Codex settings too:
+
+```text
+Use memory only when prior context is likely to change execution, not for trivial or cosmetic edits.
+
+Recall memory when:
+- the task affects architecture, workflows, tooling, testing, or repo conventions
+- the user states a durable preference or recurring correction
+- a reusable lesson is likely to matter again
+
+Skip memory for:
+- small copy, styling, or isolated UI tweaks
+- one-off debugging state
+- temporary task details or secrets
+
+Apply recalled memory only when relevant and non-conflicting.
+
+If exactly one durable reusable rule emerges, check whether it should be remembered.
+Ask at most once per turn, and only for stable preferences, conventions, workflows, or reusable lessons.
+Do not ask to remember incident summaries unless they are rewritten as reusable rules.
+```
+
+## What it does
+
+`codex-memory` organizes memory into three tiers:
+
+- `core`: tiny, always-relevant standing rules
+- `semantic`: preferences, conventions, workflows, and reusable facts
+- `episodic`: sparse lessons from past incidents when they are likely to matter again
+
+It supports:
+
+- selective recall for repo-aware or preference-sensitive work
+- explicit `suggest` flow before asking to remember something
+- promotion of stable repo rules into `AGENTS.md`
+- projection into local Markdown context repositories
+- a local MCP server named `memory`
+
+By default memory lives in `~/.codex/memories`. If `CODEX_HOME` is set, it uses `$CODEX_HOME/memories`.
+
+## Repo-only install
+
+If you only want this plugin inside one checkout:
+
+1. Clone this repo
+2. Install dependencies from the repo root:
+
+```powershell
+python -m pip install -r .\requirements.txt
+```
+
+3. Open the repo in Codex
+4. Refresh Codex if needed
+5. Install `Codex Memory` from the local plugin directory
+
+This works because the repo already includes:
+
+- `.codex-plugin/plugin.json`
+- `.agents/plugins/marketplace.json`
+- `.mcp.json`
+- `skills/`
+- `scripts/`
+
+## Useful commands
 
 ```powershell
 python ./scripts/memory_store.py --help
@@ -151,38 +134,11 @@ python ./scripts/memory_store.py sync-context --repo "<repo-path>"
 
 For a personal install, replace `./scripts/...` with `~/.codex/plugins/codex-memory/scripts/...`.
 
-## MCP server
+## Notes
 
-The plugin exposes a local FastMCP server as `memory`.
+Current Codex plugin distribution is still marketplace-based local/repo installation rather than self-serve public directory publishing.
 
-- config: `.mcp.json`
-- entrypoint: `./scripts/memory_mcp_server.py`
+Official docs:
 
-Resources include:
-
-- `memory://overview`
-- `memory://repositories`
-- `memory://global/core`
-- `memory://global/semantic`
-- `memory://repo/{repo_key}/core`
-- `memory://repo/{repo_key}/semantic`
-- `memory://repo/{repo_key}/episodic`
-
-Tools include:
-
-- `list_memories`
-- `search_memories`
-- `recall_memories`
-- `suggest_memory`
-- `add_memory`
-- `inspect_context_repo`
-- `sync_context_repo`
-- `doctor_memory_store`
-
-## Development
-
-Run the test suite from the repo root:
-
-```powershell
-python -m unittest discover -s tests -v
-```
+- [Build plugins](https://developers.openai.com/codex/plugins/build?install-scope=workspace)
+- [Plugins overview](https://developers.openai.com/codex/plugins)
