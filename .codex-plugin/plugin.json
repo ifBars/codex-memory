@@ -5,8 +5,10 @@
   "author": {
     "name": "ifbars",
     "email": "",
-    "url": ""
+    "url": "https://github.com/ifBars"
   },
+  "homepage": "https://github.com/ifBars/codex-memory",
+  "repository": "https://github.com/ifBars/codex-memory",
   "license": "MIT",
   "keywords": [
     "memory",
@@ -25,6 +27,7 @@
       "Interactive",
       "Write"
     ],
+    "websiteURL": "https://github.com/ifBars/codex-memory",
     "defaultPrompt": [
       "Use Codex Memory for this repo.",
       "Remember my coding preference.",
